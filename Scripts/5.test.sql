@@ -1,6 +1,7 @@
 select user(), database();
 
 select * from title;
+select * from employee;
 
 -- 해당 직책을 가지고 있는 사원목록을 검색
 select e.empname, e.empno
