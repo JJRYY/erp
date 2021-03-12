@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+sourceCompatibility= 1.8 // 컴파일 할 때 적용할 java code의 jdk 지정
+
+//인코딩 지정
+tasks.withType(JavaCompile) {
+    options.encoding= 'UTF-8'
+}
+
+repositories {
+    jcenter()
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.49'
+    testImplementation 'junit:junit:4.13'
+	implementation group: 'com.toedter', name: 'jcalendar', version: '1.4'
+    
+   
+}
+
+jar {
+	version = 1.0
+	mainClassName= 'erp.Erp'
+	baseName= 'Erp'
+	appendix = 'bin'
+	
+	manifest{
+		attributes 'Title': baseName, 'Version': version, 'Main-Class': mainClassName
+	}
+	dependsOn configurations.runtime // 실행가능한jar 파일설정
+}
