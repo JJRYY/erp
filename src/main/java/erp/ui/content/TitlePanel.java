@@ -16,6 +16,18 @@ public class TitlePanel extends JPanel {
 	private JTextField tfTitleNo;
 	private JTextField tfTitleName;
 
+	public JTextField getTfTitleNo() {
+		return tfTitleNo;
+	}
+	public void setTfTitleNo(JTextField tfTitleNo) {
+		this.tfTitleNo = tfTitleNo;
+	}
+	public JTextField getTfTitleName() {
+		return tfTitleName;
+	}
+	public void setTfTitleName(JTextField tfTitleName) {
+		this.tfTitleName = tfTitleName;
+	}
 	public TitlePanel() {
 		
 		initialize();

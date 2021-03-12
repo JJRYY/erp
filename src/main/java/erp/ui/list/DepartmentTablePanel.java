@@ -34,4 +34,8 @@ public class DepartmentTablePanel extends AbstractCustomTablePanel<Department> {
 		list = service.showDepartments();
 		
 	}
+	
+	public void setService(DepartmentService service) {
+		this.service = service;
+	}
 }

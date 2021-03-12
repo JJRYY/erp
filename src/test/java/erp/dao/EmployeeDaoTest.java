@@ -67,5 +67,27 @@ private EmployeeDao dao = EmployeeDaoImpl.getInstance();
 		Assert.assertNotNull(emp);
 		System.out.println(emp);
 	}
+	
+	@Test
+	public void test06SelectEmployeeByTitle() {
+		System.out.printf("%s()%n", "testSelectEmployeeByTitle");
+		Title selTitle = new Title(3);
+		List<Employee> empList = dao.selectEmployeeByTitle(selTitle);
+		Assert.assertNotNull(empList);
+		for (Employee t : empList) {
+			System.out.println(t);
+		}
+	}
+	
+	@Test
+	public void test07SelectEmployeeByDept() {
+		System.out.printf("%s()%n", "testSelectEmployeeByDept");
+		Department selDept = new Department(3);
+		List<Employee> empList = dao.selectEmployeeByDept(selDept);
+		Assert.assertNotNull(empList);
+		for (Employee t : empList) {
+			System.out.println(t);
+		}
+	}
 
 }

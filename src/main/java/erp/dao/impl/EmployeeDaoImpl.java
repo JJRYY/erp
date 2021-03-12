@@ -146,4 +146,56 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return 0;
 	}
 
+	@Override
+	public List<Employee> selectEmployeeByTitle(Title title) {
+		String sql = "select empno, empname" + 
+				" from employee e join title t on e.title = t.tno" + 
+				" where t.tno = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, title.gettNo());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if (rs.next()) {
+					List<Employee> list = new ArrayList<>();
+					do {
+						list.add(getEmployee2(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private Employee getEmployee2(ResultSet rs) throws SQLException {
+		int empNo = rs.getInt("empno");
+		String empName = rs.getString("empname");
+		return new Employee(empNo, empName);
+	}
+
+	@Override
+	public List<Employee> selectEmployeeByDept(Department dept) {
+		String sql = "select empno, empname	"
+				+ "from employee e join department d on e.dept = d.deptno "
+				+ "where d.deptno = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, dept.getDeptNo());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if (rs.next()) {
+					List<Employee> list = new ArrayList<>();
+					do {
+						list.add(getEmployee2(rs));
+					} while (rs.next());
+					return list;
+				}
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

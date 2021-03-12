@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import erp.ui.DepartmentManager;
 import erp.ui.TitleManager;
 
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class Main extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnTitle;
+	private JButton btnDepartment;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -48,7 +50,8 @@ public class Main extends JFrame implements ActionListener {
 		btnTitle.addActionListener(this);
 		contentPane.add(btnTitle);
 		
-		JButton btnDepartment = new JButton("부서");
+		btnDepartment = new JButton("부서");
+		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
 		
 		JButton btnEmployee = new JButton("사원");
@@ -56,12 +59,19 @@ public class Main extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnDepartment) {
+			actionPerformedBtnDepartment(e);
+		}
 		if (e.getSource() == btnTitle) {
 			actionPerformedBtnTitle(e);
 		}
 	}
 	protected void actionPerformedBtnTitle(ActionEvent e) {
 		TitleManager frame = new TitleManager();
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnDepartment(ActionEvent e) {
+		DepartmentManager frame = new DepartmentManager();
 		frame.setVisible(true);
 	}
 }

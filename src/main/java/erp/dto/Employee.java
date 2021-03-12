@@ -15,6 +15,11 @@ public class Employee {
 		this.empNo = empNo;
 	}
 
+	public Employee(int empNo, String empName) {
+		this.empNo = empNo;
+		this.empName = empName;
+	}
+
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept) {
 		this.empNo = empNo;
 		this.empName = empName;
@@ -72,9 +77,13 @@ public class Employee {
 		this.dept = dept;
 	}
 
-
 	@Override
 	public String toString() {
+		return String.format("%s(%s)", empName, empNo);
+	}
+
+	
+	public String toString2() {
 		return String.format("%s, %s, %s, %s, %s, %s", empNo,
 				empName, title.gettNo(), manager.getEmpNo(), salary, dept.getDeptNo());
 	}

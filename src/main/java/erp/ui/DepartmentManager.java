@@ -13,54 +13,53 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
+import erp.dto.Department;
 import erp.dto.Employee;
-import erp.dto.Title;
-import erp.service.TitleService;
-import erp.ui.content.TitlePanel;
+import erp.service.DepartmentService;
+import erp.ui.content.DeptPanel;
 import erp.ui.exception.InvalidCheckException;
 import erp.ui.exception.NotSelectedException;
 import erp.ui.exception.SqlConstraintException;
-import erp.ui.list.TitleTablePanel;
+import erp.ui.list.DepartmentTablePanel;
 
 @SuppressWarnings("serial")
-public class TitleManager extends JFrame implements ActionListener {
+public class DepartmentManager extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JButton btnAdd;
+	private DepartmentService service;
+	private DepartmentTablePanel pList;
 	private JButton btnCancel;
-	private TitleTablePanel pList;
-	private TitlePanel pContent;
-	private TitleService service;
-	
-	public TitleManager() {
-		service = new TitleService();
+	private DeptPanel pContent;
+	private JButton btnAdd;
+
+	public DepartmentManager() {
+		service = new DepartmentService();
 		initialize();
 	}
-
 	private void initialize() {
-		setTitle("직책관리");
+		setTitle("부서관리");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(200, 200, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-
-		pContent = new TitlePanel();
+		
+		pContent = new DeptPanel();
 		contentPane.add(pContent);
-
+		
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn);
-
+		
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
 		pBtn.add(btnAdd);
-
+		
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
-
-		pList = new TitleTablePanel();
+		
+		pList = new DepartmentTablePanel();
 		pList.setService(service);
 		pList.loadData();
 		contentPane.add(pList);
@@ -80,9 +79,9 @@ public class TitleManager extends JFrame implements ActionListener {
 		deleteItem.addActionListener(popupMenuListener);
 		popMenu.add(deleteItem);
 		
-		JMenuItem empListByTitleItem = new JMenuItem("동일 직책 사원 보기");
-		empListByTitleItem.addActionListener(popupMenuListener);
-		popMenu.add(empListByTitleItem);
+		JMenuItem empListByDeptItem = new JMenuItem("동일 부서 사원 보기");
+		empListByDeptItem.addActionListener(popupMenuListener);
+		popMenu.add(empListByDeptItem);
 		
 		return popMenu;
 	}
@@ -92,34 +91,35 @@ public class TitleManager extends JFrame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				if (e.getActionCommand().equals("삭제")) {
-					Title delTitle = pList.getItem();
-					service.removeTitle(delTitle);
+					Department delDept = pList.getItem();
+					service.removeDepartment(delDept);
 					pList.loadData();
-					JOptionPane.showMessageDialog(null, delTitle + " 삭제 되었습니다.");
+					JOptionPane.showMessageDialog(null, delDept + " 삭제 되었습니다.");
 				}
 				if (e.getActionCommand().equals("수정")) {
 					btnAdd.setText("수정");
-					pContent.setTitle(pList.getItem());
-					pContent.getTfTitleNo().setEnabled(false);
+					pContent.setDepartment(pList.getItem());
+					pContent.getTfDeptNo().setEnabled(false);
 				}
-				if (e.getActionCommand().equals("동일 직책 사원 보기")) {
-					Title selTitle = pList.getItem();
-					List<Employee> list = service.selectEmployeeByTitle(selTitle);
+				if (e.getActionCommand().equals("동일 부서 사원 보기")) {
+					Department selDept = pList.getItem();
+					List<Employee> list = service.selectEmployeeByDept(selDept);
 					if (list == null) {
-						JOptionPane.showMessageDialog(null, "해당 직책 사원 없음");
+						JOptionPane.showMessageDialog(null, "해당 부서 사원 없음");
 					} else {
 						JOptionPane.showMessageDialog(null, list);
 					}
 				}
+				
 			} catch (NotSelectedException | SqlConstraintException e2) {
 				JOptionPane.showMessageDialog(null, e2.getMessage());
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
+			
 		}
 	};
 	
-
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
@@ -130,38 +130,35 @@ public class TitleManager extends JFrame implements ActionListener {
 					actionPerformedBtnAdd(e);
 				}
 				if (btnAdd.getText().equals("수정")) {
-					actionperformedBtnUpdate(e);
+					actionPerformedBtnUpdate(e);
 				}
 			}
-			
 		} catch (InvalidCheckException | SqlConstraintException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
-//			pContent.clearTf();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
-
-	protected void actionperformedBtnUpdate(ActionEvent e) {
-		Title updateTitle = pContent.getTitle();
-		service.updateTitle(updateTitle);
+	
+	private void actionPerformedBtnUpdate(ActionEvent e) {
+		Department updateDept = pContent.getDepartment();
+		service.updateDepartment(updateDept);
 		pList.loadData();
 		pContent.clearTf();
 		btnAdd.setText("추가");
-		pContent.getTfTitleNo().setEnabled(true);
-		JOptionPane.showMessageDialog(null, updateTitle);
-	}
-	
-	protected void actionPerformedBtnAdd(ActionEvent e) {
-		Title title = pContent.getTitle();
-		service.addTitle(title);
-		JOptionPane.showMessageDialog(null, title + " 추가했습니다.");
-		pList.loadData();
-		pContent.clearTf();
-
+		pContent.getTfDeptNo().setEnabled(true);
+		JOptionPane.showMessageDialog(null, updateDept);
 		
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
+		pContent.clearTf();
+	}
+	
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		Department dept = pContent.getDepartment();
+		service.addDepartment(dept);
+		JOptionPane.showMessageDialog(null, dept + " 추가했습니다.");
+		pList.loadData();
 		pContent.clearTf();
 	}
 }
