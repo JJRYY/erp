@@ -99,3 +99,5 @@ ALTER TABLE erp.emp_detail
 		REFERENCES erp.employee ( -- 사원
 			empno -- 사원번호
 		);
+		
+	
