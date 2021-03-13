@@ -94,7 +94,7 @@ public class DepartmentManager extends JFrame implements ActionListener {
 					Department delDept = pList.getItem();
 					service.removeDepartment(delDept);
 					pList.loadData();
-					JOptionPane.showMessageDialog(null, delDept + " 삭제 되었습니다.");
+					JOptionPane.showMessageDialog(null, delDept.getDeptName() + " 삭제 되었습니다.");
 				}
 				if (e.getActionCommand().equals("수정")) {
 					btnAdd.setText("수정");
@@ -147,7 +147,7 @@ public class DepartmentManager extends JFrame implements ActionListener {
 		pContent.clearTf();
 		btnAdd.setText("추가");
 		pContent.getTfDeptNo().setEnabled(true);
-		JOptionPane.showMessageDialog(null, updateDept);
+		JOptionPane.showMessageDialog(null, updateDept.getDeptName() + " 수정했습니다.");
 		
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
@@ -157,7 +157,7 @@ public class DepartmentManager extends JFrame implements ActionListener {
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Department dept = pContent.getDepartment();
 		service.addDepartment(dept);
-		JOptionPane.showMessageDialog(null, dept + " 추가했습니다.");
+		JOptionPane.showMessageDialog(null, dept.getDeptName() + " 추가했습니다.");
 		pList.loadData();
 		pContent.clearTf();
 	}

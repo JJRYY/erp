@@ -51,10 +51,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	private Employee getEmployee(ResultSet rs) throws SQLException {
 		int empNo = rs.getInt("empno");
 		String empName = rs.getString("empname");
-		Title title = new Title(rs.getInt("title_no"));
-		Employee manager = new Employee(rs.getInt("manager_no"));
-		int salary = rs.getInt("salary");
-		Department dept = new Department(rs.getInt("deptno"));
+		Title title = null;
+		Employee manager = null;
+		int salary = 0;
+		Department dept = null;
+		
+		try {
+			title = new Title(rs.getInt("title_no"));
+			manager = new Employee(rs.getInt("manager_no"));
+			salary = rs.getInt("salary");
+			dept = new Department(rs.getInt("deptno"));
+		} catch (SQLException e) {}
 		
 		try {
 			title.settName(rs.getString("title_name"));
@@ -158,7 +165,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				if (rs.next()) {
 					List<Employee> list = new ArrayList<>();
 					do {
-						list.add(getEmployee2(rs));
+						list.add(getEmployee(rs));
 					} while (rs.next());
 					return list;
 				}
@@ -167,12 +174,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private Employee getEmployee2(ResultSet rs) throws SQLException {
-		int empNo = rs.getInt("empno");
-		String empName = rs.getString("empname");
-		return new Employee(empNo, empName);
 	}
 
 	@Override
@@ -187,7 +188,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				if (rs.next()) {
 					List<Employee> list = new ArrayList<>();
 					do {
-						list.add(getEmployee2(rs));
+						list.add(getEmployee(rs));
 					} while (rs.next());
 					return list;
 				}

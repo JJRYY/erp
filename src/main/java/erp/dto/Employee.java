@@ -15,11 +15,6 @@ public class Employee {
 		this.empNo = empNo;
 	}
 
-	public Employee(int empNo, String empName) {
-		this.empNo = empNo;
-		this.empName = empName;
-	}
-
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept) {
 		this.empNo = empNo;
 		this.empName = empName;

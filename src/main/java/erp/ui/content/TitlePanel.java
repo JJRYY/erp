@@ -74,6 +74,10 @@ public class TitlePanel extends JPanel {
 	public void clearTf() {
 		tfTitleNo.setText("");
 		tfTitleName.setText("");
+		
+		if (!tfTitleNo.isEditable()) {
+			tfTitleNo.setEditable(true);
+		}
 	}
 
 }
