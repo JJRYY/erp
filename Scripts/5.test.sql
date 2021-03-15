@@ -12,3 +12,6 @@ select e.empname, e.empno
 select e.empname, e.empno
 	from employee e join department d on e.dept = d.deptno 
 	where d.deptno = 1;
+	
+select * from employee 
+	where empno = 1003;
