@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import erp.dto.Department;
+import erp.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
 public class DeptPanel extends JPanel {
@@ -74,12 +75,20 @@ public class DeptPanel extends JPanel {
 	}
 
 	public Department getDepartment() {
+		validcheck();
 		int deptNo = Integer.parseInt(tfDeptNo.getText().trim());
 		String deptName = tfDeptName.getText().trim();
 		int floor = Integer.parseInt(tfFloor.getText().trim());
 		return new Department(deptNo, deptName, floor);
 	}
 	
+	private void validcheck() {
+		if (tfDeptNo.getText().contentEquals("") || tfDeptName.getText().equals("")
+				||tfFloor.getText().contentEquals("")) {
+			throw new InvalidCheckException();
+		} 
+	}
+
 	public void setDepartment(Department department) {
 //		tfDeptNo.setText(String.valueOf(department.getDeptNo()));
 		tfDeptNo.setText(department.getDeptNo() + "");
