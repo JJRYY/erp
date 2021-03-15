@@ -98,7 +98,7 @@ public class DepartmentManager extends JFrame implements ActionListener {
 				}
 				if (e.getActionCommand().equals("수정")) {
 					btnAdd.setText("수정");
-					pContent.setDepartment(pList.getItem());
+					pContent.setItem(pList.getItem());
 					pContent.getTfDeptNo().setEnabled(false);
 				}
 				if (e.getActionCommand().equals("동일 부서 사원 보기")) {
@@ -141,7 +141,7 @@ public class DepartmentManager extends JFrame implements ActionListener {
 	}
 	
 	private void actionPerformedBtnUpdate(ActionEvent e) {
-		Department updateDept = pContent.getDepartment();
+		Department updateDept = pContent.getItem();
 		service.updateDepartment(updateDept);
 		pList.loadData();
 		pContent.clearTf();
@@ -155,7 +155,7 @@ public class DepartmentManager extends JFrame implements ActionListener {
 	}
 	
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		Department dept = pContent.getDepartment();
+		Department dept = pContent.getItem();
 		service.addDepartment(dept);
 		JOptionPane.showMessageDialog(null, dept.getDeptName() + " 추가했습니다.");
 		pList.loadData();

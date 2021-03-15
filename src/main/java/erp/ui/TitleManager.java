@@ -100,7 +100,7 @@ public class TitleManager extends JFrame implements ActionListener {
 				}
 				if (e.getActionCommand().equals("수정")) {
 					Title updateTitle = pList.getItem();
-					pContent.setTitle(updateTitle);
+					pContent.setItem(updateTitle);
 					pContent.getTfTitleNo().setEnabled(false);
 					btnAdd.setText("수정");
 				}
@@ -170,7 +170,7 @@ public class TitleManager extends JFrame implements ActionListener {
 		 * pContent clearTf() 호출하여 초기화
 		 * btnAdd 텍스트 변경 수정 -> 추가
 		 */
-		Title updateTitle = pContent.getTitle();
+		Title updateTitle = pContent.getItem();
 		service.updateTitle(updateTitle);
 		pList.loadData();
 		btnAdd.setText("추가");
@@ -180,7 +180,7 @@ public class TitleManager extends JFrame implements ActionListener {
 	}
 	
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		Title title = pContent.getTitle();
+		Title title = pContent.getItem();
 		service.addTitle(title);
 		JOptionPane.showMessageDialog(null, title + " 추가했습니다.");
 		pList.loadData();

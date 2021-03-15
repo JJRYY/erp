@@ -102,7 +102,7 @@ public class TestFrame extends JFrame implements ActionListener {
 		
 	}
 	protected void actionPerformedBtnAdd(ActionEvent e) {
-		Employee emp = pEmpItem.getEmployee();
+		Employee emp = pEmpItem.getItem();
 		service.addEmployee(emp);
 		String message = String.format("%s(%d)%n"
 				+ "title(%s)%n"
@@ -119,7 +119,7 @@ public class TestFrame extends JFrame implements ActionListener {
 	protected void actionPerformedBtnSet(ActionEvent e) {
 //		Employee newEmp = pEmpList.getItem();
 		Employee newEmp = new Employee(1003, "조민희", new Title(3), new Employee(4377), 3000000, new Department(2));
-		pEmpItem.setEmployee(newEmp);
+		pEmpItem.setItem(newEmp);
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pEmpItem.clearTf();

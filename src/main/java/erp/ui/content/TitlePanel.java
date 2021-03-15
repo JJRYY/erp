@@ -12,7 +12,7 @@ import erp.dto.Title;
 import erp.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class TitlePanel extends JPanel {
+public class TitlePanel extends InterfaceItem<Title>{
 	private JTextField tfTitleNo;
 	private JTextField tfTitleName;
 
@@ -24,7 +24,9 @@ public class TitlePanel extends JPanel {
 		
 		initialize();
 	}
-	private void initialize() {
+	
+	@Override
+	public void initialize() {
 		setBorder(new TitledBorder(null, "직책 정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 10, 10));
 		
@@ -45,24 +47,25 @@ public class TitlePanel extends JPanel {
 		add(tfTitleName);
 	}
 	
-	public void setTitle(Title title) {
-		tfTitleNo.setText(title.gettNo() + "");
-		tfTitleName.setText(title.gettName() + "");
-	}
+//	public void setTitle(Title title) {
+//		tfTitleNo.setText(title.gettNo() + "");
+//		tfTitleName.setText(title.gettName() + "");
+//	}
+//	
+//	public Title getTitle() {
+//		validCheck();
+//		int titleNo = Integer.parseInt(tfTitleNo.getText().trim());
+//		String titleName = tfTitleName.getText().trim();
+//		return new Title(titleNo, titleName);
+//	}
+//	
+//	private void validCheck() {
+//		if (tfTitleNo.getText().contentEquals("") || tfTitleName.getText().equals("")) {
+//			throw new InvalidCheckException();
+//		} 
+//	}
 	
-	public Title getTitle() {
-		validCheck();
-		int titleNo = Integer.parseInt(tfTitleNo.getText().trim());
-		String titleName = tfTitleName.getText().trim();
-		return new Title(titleNo, titleName);
-	}
-	
-	private void validCheck() {
-		if (tfTitleNo.getText().contentEquals("") || tfTitleName.getText().equals("")) {
-			throw new InvalidCheckException();
-		} 
-	}
-	
+	@Override
 	public void clearTf() {
 		tfTitleNo.setText("");
 		tfTitleName.setText("");
@@ -70,6 +73,32 @@ public class TitlePanel extends JPanel {
 		if (!tfTitleNo.isEditable()) {
 			tfTitleNo.setEditable(true);
 		}
+	}
+
+
+	@Override
+	public void setItem(Title item) {
+		tfTitleNo.setText(item.gettNo() + "");
+		tfTitleName.setText(item.gettName() + "");
+		
+		tfTitleNo.setEditable(false);
+		
+	}
+
+	@Override
+	public Title getItem() {
+		validCheck();
+		int titleNo = Integer.parseInt(tfTitleNo.getText().trim());
+		String titleName = tfTitleName.getText().trim();
+		return new Title(titleNo, titleName);
+	}
+
+	@Override
+	public void validCheck() {
+		if (tfTitleNo.getText().contentEquals("") || tfTitleName.getText().equals("")) {
+			throw new InvalidCheckException();
+		} 
+		
 	}
 
 }
