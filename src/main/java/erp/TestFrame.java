@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import erp.dto.Department;
 import erp.dto.Employee;
+import erp.dto.Title;
 import erp.service.EmployeeService;
 import erp.ui.content.EmployeePanel;
 import erp.ui.exception.InvalidCheckException;
@@ -115,8 +117,8 @@ public class TestFrame extends JFrame implements ActionListener {
 		pEmpItem.clearTf();
 	}
 	protected void actionPerformedBtnSet(ActionEvent e) {
-		Employee newEmp = pEmpList.getItem();
-//		Employee newEmp = new Employee(1003, "조민희", new Title(3), new Employee(4377), 3000000, new Department(2));
+//		Employee newEmp = pEmpList.getItem();
+		Employee newEmp = new Employee(1003, "조민희", new Title(3), new Employee(4377), 3000000, new Department(2));
 		pEmpItem.setEmployee(newEmp);
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
