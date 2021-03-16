@@ -15,3 +15,8 @@ select e.empname, e.empno
 	
 select * from employee 
 	where empno = 1003;
+	
+-- pass 길이 확인
+-- 단방향 함수(Hash:MD5)
+select password('aaa'), length(password('asfsdafaseraeraaaa')) from dual;
+
