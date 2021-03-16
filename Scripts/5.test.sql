@@ -29,3 +29,6 @@ select * from emp_detail;
 select empno, pic, gender, hireDate, pass from emp_detail where empno = ?;
 
 delete from emp_detail where empno = 1003;
+
+
+update emp_detail set pic = ?, gender = ?, hireDate = ?, pass = password(?) where empno = 1003;

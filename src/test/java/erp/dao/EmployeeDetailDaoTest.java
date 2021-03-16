@@ -1,7 +1,5 @@
 package erp.dao;
 
-import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,6 +42,7 @@ public class EmployeeDetailDaoTest {
 		EmployeeDetail empDetail = new EmployeeDetail(1003, true, new Date(), "1234", getImage("noImage.jpg"));
 		int res = dao.insertEmployeeDetail(empDetail);
 		Assert.assertEquals(1, res);
+		System.out.println(dao.selectEmployeeDetailByNo(new Employee(1003)));
 		
 	}
 
@@ -64,7 +63,12 @@ public class EmployeeDetailDaoTest {
 
 	@Test
 	public void test03UpdateEmployeeDetail() {
-		fail("Not yet implemented");
+		System.out.printf("%s()%n", "testUpdateEmployeeDetail");
+		
+		EmployeeDetail empDetail = new EmployeeDetail(1003, false, new Date(), "3456", getImage("1038.jpg"));
+		int res = dao.updateEmployeeDetail(empDetail);
+		Assert.assertEquals(1, res);
+		System.out.println(dao.selectEmployeeDetailByNo(new Employee(1003)));
 	}
 
 	@Test
