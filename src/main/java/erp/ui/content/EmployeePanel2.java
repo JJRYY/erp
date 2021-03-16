@@ -25,7 +25,7 @@ import erp.service.EmployeeService;
 import erp.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class EmployeePanel2 extends AbstractContent<Employee> implements ItemListener {
+public class EmployeePanel2 extends AbstractContentPanel<Employee> implements ItemListener {
 	private JTextField tfNo;
 	private JTextField tfName;
 	private JComboBox<Title> cmbTitle;
