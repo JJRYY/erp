@@ -34,10 +34,14 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetailPane
 	private JPasswordField pfPass1;
 	private JPasswordField pfPass2;
 	private String imgPath = System.getProperty("user.dir") + File.separator + "images" + File.separator;
+	private JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 	private JLabel lblPic;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnAddPic;
-	private JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+	private JLabel lblPassConfirm;
+	private JDateChooser dateHire;
+	private JRadioButton rdbtnFemale;
+	private JRadioButton rdbtnMale;
 	
 	public EmployeeDetailPanel() {
 		initialize();
@@ -103,7 +107,7 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetailPane
 		rdbtnFemale.setSelected(true);
 		pGender.add(rdbtnFemale);
 		
-		JRadioButton rdbtnMale = new JRadioButton("남성");
+		rdbtnMale = new JRadioButton("남성");
 		buttonGroup.add(rdbtnMale);
 		pGender.add(rdbtnMale);
 		
@@ -126,11 +130,11 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetailPane
 		JPanel pSpace = new JPanel();
 		pContent.add(pSpace);
 		
-		lblConfirm = new JLabel("비밀번호 확인");
-		lblConfirm.setFont(new Font("굴림", Font.BOLD, 20));
-		lblConfirm.setForeground(Color.RED);
-		lblConfirm.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(lblConfirm);
+		lblPassConfirm = new JLabel("비밀번호 확인");
+		lblPassConfirm.setFont(new Font("굴림", Font.BOLD, 20));
+		lblPassConfirm.setForeground(Color.RED);
+		lblPassConfirm.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(lblPassConfirm);
 	}
 
 	@Override
@@ -145,7 +149,7 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetailPane
 
 	@Override
 	public void validCheck() {
-		if (!lblConfirm.getText().equals("일치")) {
+		if (!lblPassConfirm.getText().equals("일치")) {
 			throw new InvalidCheckException("비밀번호 불일치");
 		}
 	}
@@ -157,7 +161,7 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetailPane
 		rdbtnFemale.setSelected(true);
 		pfPass1.setText("");
 		pfPass2.setText("");
-		lblConfirm.setText("");
+		lblPassConfirm.setText("");
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -202,13 +206,12 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetailPane
 			String pw1 = new String(pfPass1.getPassword());
 			String pw2 = String.valueOf(pfPass2.getPassword());
 			if (pw1.contentEquals(pw2)) {
-				lblConfirm.setText("비밀번호 일치");
+				lblPassConfirm.setText("비밀번호 일치");
 			} else {
-				lblConfirm.setText("비밀번호 불일치");
+				lblPassConfirm.setText("비밀번호 불일치");
 			}
 		}
 	};
+	
 
-	private JLabel lblConfirm;
-	private JDateChooser dateHire;
-	private JRadioButton rdbtnFemale;}
+}
