@@ -21,14 +21,14 @@ import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.TitleTablePanel;
 
 @SuppressWarnings("serial")
-public abstract class AbstractManagerUI extends JFrame implements ActionListener {
+public abstract class AbstractManagerUI<T> extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	protected JButton btnAdd;
 	private JButton btnCancel;
 	
-	protected AbstractContentPanel<Title> pContent; // AbstractContentPanel
-	protected AbstractCustomTablePanel<Title> pList; // AbstractCustomTablePanel
+	protected AbstractContentPanel<T> pContent; // AbstractContentPanel
+	protected AbstractCustomTablePanel<T> pList; // AbstractCustomTablePanel
 	
 	public AbstractManagerUI() {
 		setService();		// service 연결
@@ -121,9 +121,9 @@ public abstract class AbstractManagerUI extends JFrame implements ActionListener
 	
 	protected abstract void tableLoadData();
 	
-	protected abstract TitlePanel createContentPanel();
+	protected abstract AbstractContentPanel<T> createContentPanel();
 	
-	protected abstract TitleTablePanel createTablePanel();
+	protected abstract AbstractCustomTablePanel<T> createTablePanel();
 
 	protected abstract void actionPerformedMenuGubun();
 
