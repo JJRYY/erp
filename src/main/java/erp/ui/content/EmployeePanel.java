@@ -55,7 +55,7 @@ public class EmployeePanel extends AbstractContent<Employee> implements ItemList
 		
 	}
 	
-	public void initialize() {
+	private void initialize() {
 		setBorder(new TitledBorder(null, "사원 정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new BorderLayout(0, 0));
 		

@@ -45,7 +45,7 @@ public class DeptPanel extends AbstractContent<Department> {
 		initialize();
 	}
 	
-	public void initialize() {
+	private void initialize() {
 		setBorder(new TitledBorder(null, "부서 정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 10, 10));
 		
