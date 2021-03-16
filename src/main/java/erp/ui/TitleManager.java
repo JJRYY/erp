@@ -17,10 +17,12 @@ import javax.swing.border.EmptyBorder;
 import erp.dto.Employee;
 import erp.dto.Title;
 import erp.service.TitleService;
+import erp.ui.content.AbstractContentPanel;
 import erp.ui.content.TitlePanel;
 import erp.ui.exception.InvalidCheckException;
 import erp.ui.exception.NotSelectedException;
 import erp.ui.exception.SqlConstraintException;
+import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.TitleTablePanel;
 
 @SuppressWarnings("serial")
@@ -29,13 +31,24 @@ public class TitleManager extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private TitleTablePanel pList;
-	private TitlePanel pContent;
+	
+	private AbstractContentPanel<Title> pContent; // AbstractContentPanel
+	private AbstractCustomTablePanel<Title> pList; // AbstractCustomTablePanel
 	private TitleService service;
 	
 	public TitleManager() {
+		setService();		// service 연결
+		initialize();	
+		tableLoadData();	// component load data
+	}
+
+	public void tableLoadData() {
+		((TitleTablePanel)pList).setService(service);
+		pList.loadData();
+	}
+
+	private void setService() {
 		service = new TitleService();
-		initialize();
 	}
 
 	private void initialize() {
@@ -47,7 +60,7 @@ public class TitleManager extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		pContent = new TitlePanel();
+		pContent = createContentPanel();
 		contentPane.add(pContent);
 
 		JPanel pBtn = new JPanel();
@@ -61,13 +74,19 @@ public class TitleManager extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 
-		pList = new TitleTablePanel();
-		pList.setService(service);
-		pList.loadData();
+		pList = createTablePanel();
 		contentPane.add(pList);
 		
 		JPopupMenu popupMenu = createPopupMenu();
 		pList.setPopupMenu(popupMenu);
+	}
+
+	public TitleTablePanel createTablePanel() {
+		return new TitleTablePanel();
+	}
+
+	public TitlePanel createContentPanel() {
+		return new TitlePanel();
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -101,7 +120,7 @@ public class TitleManager extends JFrame implements ActionListener {
 				if (e.getActionCommand().equals("수정")) {
 					Title updateTitle = pList.getItem();
 					pContent.setItem(updateTitle);
-					pContent.getTfTitleNo().setEnabled(false);
+//					pContent.getTfTitleNo().setEnabled(false);
 					btnAdd.setText("수정");
 				}
 				if (e.getActionCommand().equals("동일 직책 사원 보기")) {
@@ -174,7 +193,7 @@ public class TitleManager extends JFrame implements ActionListener {
 		service.updateTitle(updateTitle);
 		pList.loadData();
 		btnAdd.setText("추가");
-		pContent.getTfTitleNo().setEnabled(true);
+//		pContent.getTfTitleNo().setEnabled(true);
 		JOptionPane.showMessageDialog(null, updateTitle.gettName() + " 정보가 수정되었습니다.");
 		pContent.clearTf();
 	}
