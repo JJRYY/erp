@@ -2,17 +2,17 @@ package erp;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import erp.ui.DepartmentManager;
-import erp.ui.TitleManager;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import erp.ui.DepartmentManagerUI;
+import erp.ui.EmployeeManagerUI;
+import erp.ui.TitleManagerUI;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements ActionListener {
@@ -20,6 +20,7 @@ public class Main extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnTitle;
 	private JButton btnDepartment;
+	private JButton btnEmployee;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -54,11 +55,15 @@ public class Main extends JFrame implements ActionListener {
 		btnDepartment.addActionListener(this);
 		contentPane.add(btnDepartment);
 		
-		JButton btnEmployee = new JButton("사원");
+		btnEmployee = new JButton("사원");
+		btnEmployee.addActionListener(this);
 		contentPane.add(btnEmployee);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEmployee) {
+			actionPerformedBtnEmployee(e);
+		}
 		if (e.getSource() == btnDepartment) {
 			actionPerformedBtnDepartment(e);
 		}
@@ -67,11 +72,18 @@ public class Main extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnTitle(ActionEvent e) {
-		TitleManager frame = new TitleManager();
+		TitleManagerUI frame = new TitleManagerUI();
+		frame.setTitle("직책 관리");
 		frame.setVisible(true);
 	}
 	protected void actionPerformedBtnDepartment(ActionEvent e) {
-		DepartmentManager frame = new DepartmentManager();
+		DepartmentManagerUI frame = new DepartmentManagerUI();
+		frame.setTitle("부서 관리");
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnEmployee(ActionEvent e) {
+		EmployeeManagerUI frame = new EmployeeManagerUI();
+		frame.setTitle("부서 관리");
 		frame.setVisible(true);
 	}
 }
