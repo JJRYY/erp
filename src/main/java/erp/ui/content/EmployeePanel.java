@@ -25,7 +25,7 @@ import erp.service.EmployeeService;
 import erp.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class EmployeePanel extends InterfaceItem<Employee> implements ItemListener {
+public class EmployeePanel extends AbstractContent<Employee> implements ItemListener {
 	private JTextField tfNo;
 	private JTextField tfName;
 	private JComboBox<Title> cmbTitle;
@@ -55,7 +55,6 @@ public class EmployeePanel extends InterfaceItem<Employee> implements ItemListen
 		
 	}
 	
-	@Override
 	public void initialize() {
 		setBorder(new TitledBorder(null, "사원 정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new BorderLayout(0, 0));

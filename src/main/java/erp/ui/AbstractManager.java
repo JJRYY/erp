@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import erp.dto.Title;
 import erp.ui.content.DeptPanel;
 import erp.ui.content.EmployeePanel;
-import erp.ui.content.InterfaceItem;
+import erp.ui.content.AbstractContent;
 import erp.ui.content.TitlePanel;
 import erp.ui.exception.InvalidCheckException;
 import erp.ui.exception.NotSelectedException;
@@ -32,7 +32,7 @@ public abstract class AbstractManager<T> extends JFrame implements ActionListene
 	private JButton btnCancel;
 	
 	protected AbstractCustomTablePanel<T> pList;
-	protected InterfaceItem<T> pContent;
+	protected AbstractContent<T> pContent;
 	
 //	private TitleService service;
 	
@@ -81,7 +81,7 @@ public abstract class AbstractManager<T> extends JFrame implements ActionListene
 
 	public abstract AbstractCustomTablePanel<T> getItemList();
 
-	public abstract InterfaceItem<T> getItemPanel();
+	public abstract AbstractContent<T> getItemPanel();
 
 	public JPopupMenu createPopupMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
