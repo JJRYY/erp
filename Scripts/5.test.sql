@@ -20,3 +20,15 @@ select * from employee
 -- 단방향 함수(Hash:MD5)
 select password('aaa'), length(password('asfsdafaseraeraaaa')) from dual;
 
+-- emp_detail insert
+INSERT INTO erp.emp_detail(empno, pic, gender, hireDate, pass)
+VALUES(?, ?, ?, ?, ?);
+
+select * from emp_detail;
+
+select empno, pic, gender, hireDate, pass from emp_detail where empno = ?;
+
+delete from emp_detail where empno = 1003;
+
+
+update emp_detail set pic = ?, gender = ?, hireDate = ?, pass = password(?) where empno = 1003;
