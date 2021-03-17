@@ -4,6 +4,7 @@ import javax.swing.SwingConstants;
 
 import erp.dto.Title;
 import erp.service.TitleService;
+import erp.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
 public class TitleTablePanel extends AbstractCustomTablePanel<Title> {
@@ -36,6 +37,18 @@ public class TitleTablePanel extends AbstractCustomTablePanel<Title> {
 
 	public void setService(TitleService service) {
 		this.service = service;
+	}
+
+	@Override
+	public Title getItem() {
+		int row = table.getSelectedRow();
+		int titleNo = (int) table.getValueAt(row, 0);
+		
+		if (row == -1) {
+			throw new NotSelectedException();
+		}
+		
+		return list.get(list.indexOf(new Title(titleNo)));
 	}
 	
 	
