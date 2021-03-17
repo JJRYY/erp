@@ -15,9 +15,6 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import erp.service.TitleService;
-import erp.ui.exception.NotSelectedException;
-
 
 @SuppressWarnings("serial")
 public abstract class AbstractCustomTablePanel<T> extends JPanel {
