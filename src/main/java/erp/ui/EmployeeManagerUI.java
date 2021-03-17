@@ -1,12 +1,17 @@
 package erp.ui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import erp.dto.Employee;
+import erp.dto.EmployeeDetail;
+import erp.service.EmployeeDetailService;
 import erp.service.EmployeeService;
 import erp.ui.content.AbstractContentPanel;
+import erp.ui.content.EmployeeDetailPanel;
 import erp.ui.content.EmployeePanel;
 import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
@@ -14,6 +19,7 @@ import erp.ui.list.EmployeeTablePanel;
 @SuppressWarnings("serial")
 public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
 	private EmployeeService service;
+	private EmployeeDetailService detailService;
 	
 	public EmployeeManagerUI() {
 		empListByTitleItem.setText(AbstractManagerUI.EMP_MENU);
@@ -22,6 +28,7 @@ public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
 	@Override
 	protected void setService() {
 		service = new EmployeeService();
+		detailService = new EmployeeDetailService();
 	}
 
 	@Override
@@ -44,7 +51,34 @@ public class EmployeeManagerUI extends AbstractManagerUI<Employee> {
 
 	@Override
 	protected void actionPerformedMenuGubun() {
-		throw new UnsupportedOperationException("제공되지 않음");
+		Employee emp = pList.getItem();
+//		System.out.println(emp);
+		EmployeeDetail empDetail = detailService.selectEmployeeDetailByEmpNo(emp);
+		// 나중에 처리
+		EmployeeDetailUI frame;
+		if (empDetail == null) {
+			frame = new EmployeeDetailUI(true, detailService);
+//			JOptionPane.showMessageDialog(null, "세부정보 없음");
+//			return;
+		} else {
+			frame = new EmployeeDetailUI(false, detailService);
+			frame.setDetailItem(empDetail);
+		}
+		
+		frame.setEmpNo(emp);
+		frame.setVisible(true);
+		
+		/*
+//		System.out.println(empDetail);
+		JFrame subFrame = new JFrame("사원 세부 정보");
+		subFrame.setBounds(this.getWidth(), this.getHeight(), 450, 500);
+		EmployeeDetailPanel subDetailPanel = new EmployeeDetailPanel();
+		subDetailPanel.setItem(empDetail);
+		subFrame.add(subDetailPanel, BorderLayout.CENTER);
+		subFrame.setVisible(true);
+		*/
+		
+//		throw new UnsupportedOperationException("제공되지 않음");
 	}
 
 	@Override

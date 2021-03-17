@@ -51,7 +51,7 @@ public class Main extends JFrame implements ActionListener {
 		deptFrame.setTitle("부서 관리");
 		
 		empFrame = new EmployeeManagerUI();
-		empFrame.setTitle("부서 관리");
+		empFrame.setTitle("사원 관리");
 	}
 	
 	private void initialize() {
