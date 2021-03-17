@@ -29,6 +29,11 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	
 	protected AbstractContentPanel<T> pContent; // AbstractContentPanel
 	protected AbstractCustomTablePanel<T> pList; // AbstractCustomTablePanel
+	protected JMenuItem empListByTitleItem;
+	
+	protected static final String TITLE_MENU = "동일 직책 사원 보기";
+	protected static final String DEPT_MENU = "동일 부서 사원 보기";
+	protected static final String EMP_MENU = "사원 세부정보 보기";
 	
 	public AbstractManagerUI() {
 		setService();		// service 연결
@@ -77,7 +82,7 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		deleteItem.addActionListener(this);
 		popMenu.add(deleteItem);
 		
-		JMenuItem empListByTitleItem = new JMenuItem("동일 직책 사원 보기");
+		empListByTitleItem = new JMenuItem("동일 직책 사원 보기");
 		empListByTitleItem.addActionListener(this);
 		popMenu.add(empListByTitleItem);
 		
@@ -93,7 +98,18 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 				if (e.getActionCommand().equals("수정")) {
 					actionPerformedMenuUpdate();
 				}
-				if (e.getActionCommand().equals("동일 직책 사원 보기")) {
+//				if (e.getActionCommand().equals(AbstractManagerUI.TITLE_MENU)) {
+//					actionPerformedMenuGubun();
+//				}
+//				if (e.getActionCommand().equals(AbstractManagerUI.DEPT_MENU)) {
+//					actionPerformedMenuGubun();
+//				}
+//				if (e.getActionCommand().equals(AbstractManagerUI.EMP_MENU)) {
+//					actionPerformedMenuGubun();
+//				}
+				if (e.getActionCommand().equals(AbstractManagerUI.EMP_MENU)||
+						e.getActionCommand().equals(AbstractManagerUI.TITLE_MENU) ||
+						e.getActionCommand().equals(AbstractManagerUI.DEPT_MENU)) {
 					actionPerformedMenuGubun();
 				}
 			} else {
